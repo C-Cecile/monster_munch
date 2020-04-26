@@ -87,12 +87,18 @@ while game_running == True:
         else:
             #Slowprint this first two lines later
             print("Cool. Cool, cool, cool! So...")
-            print("\nWhat do you want to do?now")
+            print("\nWhat do you want to do now?")
             print("1 - Attack, duh")
             print("2 - Heal")
             print("")
             player_choice = input()
-            if player_choice == "1":
+            if player_choice == "1" and monster["health"] - player["attack"] <= 0:
+                monster["health"] = 0
+                print("\nAnnnnnnnnd you just killed Monster Munch. Hope you did't get too attached to its loving personnality.")
+                print("\nThanks for playing!")
+                game_running == False
+                break
+            elif player_choice == "1" and monster["health"] - player["attack"] > 0:
                 print("\nTHIS IS SPARTA!")
                 monster["health"] = monster["health"] - player["attack"]
                 #Slowprint this first line later
