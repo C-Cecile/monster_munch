@@ -30,6 +30,10 @@ while game_running == True:
         print("Thanks for playing!")
         game_running == False
         break
+    elif player["health"] <= 0:
+        print(emoji.emojize("\nNoOoOOooOOoO. You're dead. :broken_heart:\nThanks for playing!!", use_aliases=True))
+        game_running == False
+        break
     #Options when player attacks and Monster health > 25hp.
     elif monster["health"] > 25:
         slow_print("\nWhat do you want to do?")
@@ -65,6 +69,19 @@ while game_running == True:
                 print("\nYou now have " + str(player["health"]) + "hp.")
             else:
                 print("\nOkeydok!")
+                break
+
+        #Prints what happens when health is below 90 and player heals.
+        elif player_choice == "2" and player["health"] < 90:
+            print(emoji.emojize("\nLet's heal these wounds! :ambulance:", use_aliases=True))
+            player["health"] = player["health"] + player["attack"]
+            print(emoji.emojize("All right you just gained back " + str(player["heal"]) + "hp and now have a total of " + str(player["health"]) + "hp :heart:", use_aliases=True))
+            #Slowprint this first line later
+            print("Sooooooo turns out Monster Munch enjoys kicking a man down...")
+            print("")
+            player["health"] = player["health"] - monster["attack"]
+            print("You now have " + str(player["health"]) + "hp left.")
+            
     #Enables the Super Attack when Monster Munch health <= 25hp.
     elif monster["health"] <= 25:
         #Slowprint this first line later
@@ -116,16 +133,7 @@ while game_running == True:
                 #Slowprint this first line later
                 print(emoji.emojize("... Do you hear that...? Nothing, Monster Munch isn't attacking anymore :eyes:", use_aliases=True))
 
-    #Prints what happens when health is below 90 and player heals.
-    elif player_choice == "2" and player["health"] < 90:
-        print(emoji.emojize("\nLet's heal these wounds! :ambulance:", use_aliases=True))
-        player["health"] = player["health"] + player["attack"]
-        print(emoji.emojize("All right you just gained back " + str(player["heal"]) + "hp and now have a total of " + str(player["health"]) + "hp :heart:", use_aliases=True))
-        #Slowprint this first line later
-        print("Sooooooo turns out Monster Munch enjoys kicking a man down...")
-        print("")
-        player["health"] = player["health"] - monster["attack"]
-        print("You now have " + str(player["health"]) + "hp left.")
+
 
     #Prints what happens when player neither chooses Attack or Heal.
     else:
